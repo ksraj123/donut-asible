@@ -1,0 +1,5 @@
+---
+- name: Setting up Donut Backend
+  hosts: test
+  roles:
+    - setup_client

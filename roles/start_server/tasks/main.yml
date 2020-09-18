@@ -1,0 +1,7 @@
+---
+
+- name: "Start Node.js Server"
+  command: 'npm run start-forever'
+#   when: "forever_list.stdout.find('/path/to/app.js') == -1"
+  args:
+    chdir: donut_backend/

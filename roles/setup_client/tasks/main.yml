@@ -1,0 +1,17 @@
+---
+- name: Clone Donut Frontend Repository
+  git:
+    repo: "{{ donut_frontend_repo }}"
+    dest: /root/donut_frontend
+    version: "{{ donut_frontend_repo_branch }}"
+    force: "yes"
+
+- name: Install Frontend Dependencies
+  shell: npm install
+  args:
+    chdir: donut_frontend/
+
+- name: Start Frontend
+  shell: npm run start
+  args:
+    chdir: donut_frontend/

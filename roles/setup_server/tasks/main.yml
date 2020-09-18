@@ -1,0 +1,32 @@
+---
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- include_tasks: nodejs.yml
+
+- name: Clone Donut Backend Repository
+  git:
+    repo: "{{ donut_backend_repo }}"
+    dest: /root/donut_backend
+    version: "{{ donut_backend_repo_branch }}"
+    force: "yes"
+
+- name: Installing dependencies
+  shell: npm install
+  args:
+    chdir: donut_backend/
+
+- name: "Install forever"
+  npm: name=forever global=yes state=present
+
+- name: "Install env-cmd"
+  npm: name=env-cmd global=yes state=present
+
+- name: "Check list of Node.js apps running."
+  command: forever list
+  register: forever_list
+  changed_when: false

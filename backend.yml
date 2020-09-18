@@ -1,0 +1,16 @@
+---
+# file: backend.yml
+- name: Setting up Donut Backend
+  hosts: test
+  become: true
+  roles:
+    - setup_server
+    # - setup_dbs
+    - start_server
+
+# - name: Start Backend Server
+#   hosts: test
+#   tasks:
+#     - shell: npm run dev
+#       args:
+#         chdir: donut_backend/
